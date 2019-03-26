@@ -20,7 +20,7 @@ const writeFile = promisify(fs.writeFile);
 const save = content => writeFile(filePath, JSON.stringify(content));
 
 const find = (data, id) => data.find(item => item._id === id);
-const findIndex = (data, id) => data.findIndex(item => item._id === id);
+// const findIndex = (data, id) => data.findIndex(item => item._id === id);
 
 // parse application/x-www-form-urlencoded
 server.use(bodyParser.urlencoded({ extended: false }));
@@ -37,7 +37,8 @@ server.get('/products', (req, res) => {
 // /products/:id
 server.get('/products/:id', (req, res) => {
     const { id } = req.params;
-    const product = find(data, id);
+    // const product = find(data, id);
+    const product = data.find(item => item._id === id);
 
     if (!product) {
         res.status(404).send('No encontramos el producto');
